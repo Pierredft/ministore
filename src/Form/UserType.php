@@ -21,22 +21,6 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        // ->add('email',EmailType::class,[
-        //     'attr'=>[
-        //         'class'=>'form-control',
-        //         'minLength'=>2,
-        //         'maxLength'=>50,
-        //     ],
-        //     'label'=>'Adress email',
-        //     'label_attr'=>[
-        //         'class'=>'form-label',
-        //     ],
-        //     'constraints'=>[
-        //         new Assert\NotBlank(),
-        //         new Assert\Email(),
-        //         new Assert\Length(['min'=>2,'max'=>50,]),
-        //     ]
-        // ])
         ->add('nom', TextType::class,[
             'attr'=>[
                 'class'=>'form-control',
@@ -48,7 +32,6 @@ class UserType extends AbstractType
                 'class'=>'form-label'
             ],
             'constraints'=>[
-                new Assert\notblank(),
                 new Assert\Length(['min'=> 2,'max'=> 50])
             ]
         ])
@@ -65,6 +48,22 @@ class UserType extends AbstractType
             'constraints'=>[
                 new Assert\Length(['min'=>2,'max'=> 50])
             ] 
+        ])
+        ->add('email',EmailType::class,[
+            'attr'=>[
+                'class'=>'form-control',
+                'minLength'=>2,
+                'maxLength'=>50,
+            ],
+            'label'=>'Adress email',
+            'label_attr'=>[
+                'class'=>'form-label',
+            ],
+            'constraints'=>[
+                new Assert\NotBlank(),
+                new Assert\Email(),
+                new Assert\Length(['min'=>2,'max'=>50,]),
+            ]
         ])
         // ->add('agreeTerms', CheckboxType::class, [
         //                     'mapped' => false,

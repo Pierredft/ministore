@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Form\UserType;
+use App\Form\UserAdresseType;
 use App\Form\UserPasswordType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -92,6 +94,39 @@ class UserController extends AbstractController
         }
 
         return $this->render('pages/user/edit_password.html.twig',[
+            'form'=>$form->createView()
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
+    public function show(User $user): Response
+    {
+        return $this->render('pages/user/userInfo.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    #[Route('/user/editionAdresse/{id}', name: 'app_edit_adresse', methods: ['GET', 'POST'])]
+    public function editAdresse(UserRepository $userRepository, int $id, Request $request, EntityManagerInterface $manager):Response
+    {
+        //récupération du user par son $id
+        $user=$userRepository->findOneBy(["id"=>$id]);
+        $form=$this->createForm(UserAdresseType::class, $user);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $manager->persist($user);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                'Votre adresse a bien été modifié !'
+            );
+
+            return $this->redirectToRoute('home.index');
+        }
+
+        return $this->render('pages/user/edit_adresse.html.twig',[
             'form'=>$form->createView()
         ]);
     }
