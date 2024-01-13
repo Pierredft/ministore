@@ -13,6 +13,10 @@
             </div>
         {% endfor %}
         {{form(form)}}
+        <a class="text-success" href="{{path('app_edit_password',{id:app.user.id})}}">Changer password</a>
+        <div class="mt-4">
+        <a class="text-dark" href="{{path('app_user_show', {id: app.user.id})}}">Retour au profile utilisateur</a>
+        </div>
     </div>
 </div>
 {% endblock %}

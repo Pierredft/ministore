@@ -65,36 +65,6 @@ class UserType extends AbstractType
                 new Assert\Length(['min'=>2,'max'=>50,]),
             ]
         ])
-        // ->add('agreeTerms', CheckboxType::class, [
-        //                     'mapped' => false,
-        //     'constraints' => [
-        //         new IsTrue([
-        //             'message' => 'You should agree to our terms.',
-        //         ]),
-        //     ],
-        // ])
-        // ->add('plainPassword', RepeatedType::class,[
-        //     'type'=> PasswordType::class,
-        //         'first_options'=>[
-        //             'attr'=>[
-        //                 'class'=>'form-control'
-        //             ],
-        //             'label'=>'Mot de passe',
-        //             'label_attr'=>[
-        //                 'class'=> 'form-label'
-        //             ],
-        //         ],
-        //         'second_options'=>[
-        //             'attr'=>[
-        //                 'class'=>'form-control'
-        //             ],
-        //             'label'=>"Confirmation du mot de passe",
-        //             'label_attr'=>[
-        //                 'class'=>'form-label'
-        //             ],
-        //         ],
-        //         'invalid_message'=>"Les mots de passe ne correspondent pas"
-        // ])
         ->add('numTel', TextType::class,[
             'attr'=>[
                 'class'=>'form-control',
@@ -110,69 +80,9 @@ class UserType extends AbstractType
                 new Assert\Length(['min'=> 2,'max'=> 50])
             ]
         ])
-        // ->add('numMaison', TextType::class,[
-        //     'attr'=>[
-        //         'class'=>'form-control',
-        //         'minLength'=>1,
-        //         'maxLength'=>50
-        //     ],
-        //     'label'=>'numéro de maison',
-        //     'label_attr'=>[
-        //         'class'=>'form-label'
-        //     ],
-        //     'constraints'=>[
-        //         new Assert\notblank(),
-        //         new Assert\Length(['min'=> 2,'max'=> 50])
-        //     ]
-        // ])
-        // ->add('nomVoie', TextType::class,[
-        //     'attr'=>[
-        //         'class'=>'form-control',
-        //         'minLength'=>2,
-        //         'maxLength'=>50
-        //     ],
-        //     'label'=>'nom de la voie',
-        //     'label_attr'=>[
-        //         'class'=>'form-label'
-        //     ],
-        //     'constraints'=>[
-        //         new Assert\notblank(),
-        //         new Assert\Length(['min'=> 2,'max'=> 50])
-        //     ]
-        // ])
-        // ->add('ville', TextType::class,[
-        //     'attr'=>[
-        //         'class'=>'form-control',
-        //         'minLength'=>2,
-        //         'maxLength'=>50
-        //     ],
-        //     'label'=>'ville',
-        //     'label_attr'=>[
-        //         'class'=>'form-label'
-        //     ],
-        //     'constraints'=>[
-        //         new Assert\notblank(),
-        //         new Assert\Length(['min'=> 2,'max'=> 50])
-        //     ]
-        // ])
-        // ->add('codePostale', TextType::class,[
-        //     'attr'=>[
-        //         'class'=>'form-control',
-        //         'minLength'=>2,
-        //         'maxLength'=>50
-        //     ],
-        //     'label'=>'codePostale',
-        //     'label_attr'=>[
-        //         'class'=>'form-label'
-        //     ],
-        //     'constraints'=>[
-        //         new Assert\notblank(),
-        //         new Assert\Length(['min'=> 2,'max'=> 50])
-        //     ]
-        // ])
         ->add('submit',SubmitType::class,[
             'attr'=>[
-                'class'=>'btn btn-primary'
+                'class'=>'btn btn-primary mt-4'
             ]
         ])
         ;

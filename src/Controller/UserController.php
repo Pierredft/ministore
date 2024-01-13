@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UserImg;
 use App\Form\UserType;
 use App\Form\UserAdresseType;
 use App\Form\UserPasswordType;
@@ -63,32 +64,31 @@ class UserController extends AbstractController
     }
 
     #[Route('/user/edition-mot-de-passe/{id}', name: 'app_edit_password', methods: ['GET', 'POST'])]
-    public function editPassword(UserRepository $userRepository, int $id, Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $haser):Response
+    public function editPassword(Request $request, User $user, EntityManagerInterface $entityManager, UserPasswordHasherInterface $hasher): Response
     {
-        //récupération du user par son $id
-        $user=$userRepository->findOneBy(["id"=>$id]);
-        $form=$this->createForm(UserPasswordType::class, $user);
-
+        $form = $this->createForm(UserPasswordType::class, $user);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
-            //si le mot de passe est valide
-            if($haser->isPasswordValid($user, $form->getData()->getPlainPassword())){
-                //on récupère le nouveau mot de passe
-                $user->setPassword($haser->hashPassword($user, $form->getData()->getNewPassword()));
-                $manager->persist($user);
-                $manager->flush();
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($hasher->isPasswordValid($user, $form->getData()->getPlainPassword())) {
+                $user->setPlainPassword($form->getData()->getNewPassword());
+                $user -> setPassword(
+                    $hasher->hashPassword(
+                        $user,
+                        $form->getData()->getNewPassword()
+                    )
+                );
+                $entityManager->persist($user);
+                $entityManager->flush();
                 $this->addFlash(
                     'success',
-                    'Votre mot de passe a bien été modifié !'
+                    'Le mot de passe a été modifié'
                 );
-
                 return $this->redirectToRoute('home.index');
-            }
-            else{
+            } else {
                 $this->addFlash(
-                    'danger',
-                    'Votre mot de passe est incorrect !'
+                    'warning',
+                    'Le mot de passe renseigné est incorrect'
                 );
             }
         }
@@ -130,4 +130,4 @@ class UserController extends AbstractController
             'form'=>$form->createView()
         ]);
     }
-}
+    }
