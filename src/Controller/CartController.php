@@ -22,16 +22,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
         $total = 0;
 
         // on boucle sur le panier pour créer les données à passer à la vue
-        foreach($panier as $id => $quantité){
-            $produit = $produitRepository->find($id);
-
+        foreach ($panier as $id => $quantite){
+            $product = $produitRepository->find($id);
             $data[] = [
-                'produit' => $produit,
-                'quantité' => $quantité
+                'produit' => $product,
+                'quantite' => $quantite
             ];
-            $total += $produit->getPrix() * $quantité;
+            $total += $product->getPrix() * $quantite;
         }
-        return $this->render('pages/cart.html.twig',compact('data', 'total'));
+
+        return $this->render('pages/cart/index.html.twig',compact('data', 'total'));
     }
 
         #[Route('/add/{id}', name: 'add')]
@@ -39,20 +39,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
         {
             //on récupere l'id du produit
             $id = $produit->getId();
-
             //on récupere le panier existant
             $panier = $session->get('panier', []);
             
             //on ajoute le produit dans la session panier si il n'y est pas encore
             //sinon on augmente la quantité
-            if(!empty($panier[$id])){
+            if(empty($panier[$id])){
                 $panier[$id] =1;
             }else{
                 $panier[$id]++;
             }
 
             $session->set('panier', $panier);
-            
             //on redirige vers la page panier
             return $this->redirectToRoute('cart_index');
         }

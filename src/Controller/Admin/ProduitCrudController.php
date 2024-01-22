@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 
 class ProduitCrudController extends AbstractCrudController
 {
@@ -24,7 +25,7 @@ class ProduitCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('nom'),
-            TextField::new('prix'),
+            NumberField::new('prix'),
             TextField::new('stock'),
             TextareaField::new('description'),
             ImageField::new('image')

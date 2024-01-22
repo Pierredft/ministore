@@ -16,4 +16,14 @@ class ProduitController extends AbstractController
             'produits' => $ProduitRepository->findAll(),
         ]);
     }
+
+    #[Route('/produit/{id}', name: 'app_produit_show', methods: ['GET'])]
+    public function show(ProduitRepository $ProduitRepository, $id): Response
+    {
+        $produit = $ProduitRepository->find($id);
+
+        return $this->render('pages/produit/show.html.twig', [
+            'produit' => $produit,
+        ]);
+    }
 }

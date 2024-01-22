@@ -6,16 +6,17 @@
     <div style="padding-top:90px;"></div>
         <h1>Nos Téléphone</h1>
         {% for produit in produits%}
-        <div class="d-flex flex-row mb-3">
-            <div class="card" style="width: 18rem;">
-                <img src="{{asset('/images/produits/'~ produit.image) }}" class="card-img-top img-fluide" style="width:30%" alt="img">
-                <div class="card-body">
-                    <h5 class="card-title">{{produit.nom}}</h5>
-                    <p class="card-text"></p>
-                    <p>{{produit.prix}}$</p>
-                    <a href="{{ path('cart_add', {id: produit.id})}}" class="btn btn-primary">Ajout panier</a>
+            <div class="d-flex flex-column">
+                <div class="d-flex flex-row d-flex justify-content-evenly">
+                    <img src="{{asset('/images/produits/'~ produit.image) }}" class="card-img-top img-fluide p-2" style="width:20%" alt="img">
+                    <h2> Smartphone {{produit.nom}}</h2>
+                        <div class="d-flex flex-column align-items-center align-self-center">
+                            <p class="text-dark">$ {{produit.prix /100}}</p>
+                            <a href="{{ path('app_produit_show', {'id' : produit.id})}}" class="btn btn-primary">Voir le produit</a>
+                        </div>
                 </div>
             </div>
+            <hr class="my-4">
         </div>
     </div>
 {% endfor %}

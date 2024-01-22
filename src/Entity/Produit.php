@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProduitRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -18,7 +20,7 @@ class Produit
     private ?string $nom = null;
 
     #[ORM\Column]
-    private ?string $prix = null;
+    private ?float $prix = null;
 
     #[ORM\Column(length: 10)]
     private ?string $stock = null;
@@ -31,6 +33,14 @@ class Produit
 
     #[ORM\ManyToOne(inversedBy: 'produits')]
     private ?Type $type = null;
+
+    #[ORM\OneToMany(mappedBy: 'products', targetEntity: OrdersDetails::class)]
+    private Collection $ordersDetails;
+
+    public function __construct()
+    {
+        $this->ordersDetails = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -49,12 +59,12 @@ class Produit
         return $this;
     }
 
-    public function getPrix(): float
+    public function getPrix(): ?float
     {
         return $this->prix;
     }
 
-    public function setPrix(string $prix): static
+    public function setPrix(float $prix): static
     {
         $this->prix = $prix;
 
@@ -112,5 +122,35 @@ class Produit
     public function __toString(): string
     {
         return $this->nom;
+    }
+
+    /**
+     * @return Collection<int, OrdersDetails>
+     */
+    public function getOrdersDetails(): Collection
+    {
+        return $this->ordersDetails;
+    }
+
+    public function addOrdersDetail(OrdersDetails $ordersDetail): static
+    {
+        if (!$this->ordersDetails->contains($ordersDetail)) {
+            $this->ordersDetails->add($ordersDetail);
+            $ordersDetail->setProducts($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrdersDetail(OrdersDetails $ordersDetail): static
+    {
+        if ($this->ordersDetails->removeElement($ordersDetail)) {
+            // set the owning side to null (unless already changed)
+            if ($ordersDetail->getProducts() === $this) {
+                $ordersDetail->setProducts(null);
+            }
+        }
+
+        return $this;
     }
 }
