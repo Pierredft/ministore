@@ -28,6 +28,9 @@ class Produit
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
+    #[ORM\Column(type: Types::TEXT, nullable:true)]
+    private ?string $caracteristique = null;
+
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
@@ -150,6 +153,18 @@ class Produit
                 $ordersDetail->setProducts(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCaracteristique(): ?string
+    {
+        return $this->caracteristique;
+    }
+
+    public function setCaracteristique(?string $caracteristique): static
+    {
+        $this->caracteristique = $caracteristique;
 
         return $this;
     }
