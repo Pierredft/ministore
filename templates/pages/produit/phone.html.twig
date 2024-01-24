@@ -4,14 +4,32 @@
 
 {% block body %}
     <div style="padding-top:90px;"></div>
-        <h1>Nos Téléphone</h1>
+    <form method="get" action="{{ path('app_produit') }}">
+    <select name="tri" class="form-control mb-2" style="max-width: 150px">
+        <option value="asc">Croissant</option>
+        <option value="desc">Décroissant</option>
+    </select>
+    <button type="submit" class="btn btn-outline-secondary me-3">Trier</button>
+</form>
+<form action="{{ path('app_produit') }}" method="get">
+    <input style="width: 50%;" type="text" name="nom" class="form-control mb-2" placeholder="Nom du produit">
+        <select name="type" class="form-control mb-2" style="max-width: 150px">
+        <option value="">Tous les types</option>
+            {% for type in types %}
+            <option value="{{ type.id }}">{{ type }}</option>
+            {% endfor %}
+        </select>
+    <button class="btn btn-outline-secondary me-3" type="submit">Filtrer</button>
+    <a href="{{ path('app_produit') }}" class="btn btn-outline-secondary">Réinitialiser</a>
+</form>
+        <h1 class="text-center pb-4">Nos Téléphone</h1>
+        
         {% for produit in produits%}
             <div class="d-flex flex-column">
                 <div class="d-flex flex-row d-flex justify-content-evenly">
                     <img src="{{asset('/images/produits/'~ produit.image) }}" class="card-img-top img-fluide p-2" style="width:20%" alt="img">
                     <div class="d-flex flex-column">
-                    <h2> Smartphone {{produit.nom}}</h2>
-                        <p class="p-2 d-flex align-items-center text-dark" style="width:20%">{{produit.caracteristique}}</p>
+                    <h2>{{produit.nom}}</h2>
                         </div>
                         <div class="d-flex flex-column align-items-center align-self-center">
                             <p class="text-dark">$ {{produit.prix /100}}</p>

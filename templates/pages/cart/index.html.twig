@@ -11,6 +11,7 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th>Images</th>
                     <th>Produit</th>
                     <th>Prix</th>
                     <th>Quantité</th>
@@ -21,11 +22,12 @@
             <tbody>
                 {% for element in data %}
                     <tr>
-                        <td>{{element.produit.nom}}</td>
-                        <td>{{element.produit.prix /100}}</td>
-                        <td>{{element.quantite}}</td>
-                        <td>{{element.quantite * element.produit.prix /100}}$</td>
-                        <td>
+                        <td><img src="/images/produits/{{element.produit.image}}" alt="" class="img-fluid rounded-start" style="max-width:100px" ></td>
+                        <td class="pt-5">{{element.produit.nom}}</td>
+                        <td class="pt-5">{{element.produit.prix /100}}</td>
+                        <td class="pt-5">{{element.quantite}}</td>
+                        <td class="pt-5">{{element.quantite * element.produit.prix /100}}$</td>
+                        <td class="pt-5">
                         <a href="{{path('cart_add', {'id':element.produit.id})}}" class="btn btn-success">+</a>
                         <a href="{{path('cart_remove', {'id':element.produit.id})}}" class="btn btn-warning">-</a>
                         <a href="{{path('cart_delete', {'id':element.produit.id})}}" class="btn btn-danger">Supprimer</a>

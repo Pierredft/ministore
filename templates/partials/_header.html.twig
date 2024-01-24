@@ -1,8 +1,8 @@
 <header id="header" class="site-header header-scrolled position-fixed text-black bg-light">
     <nav id="header-nav" class="navbar navbar-expand-lg px-3 mb-3">
         <div class="container-fluid">
-        <a class="navbar-brand" href="index.html">
-            <img src="/images/main-logo.png" class="{{path('home.index')}}">
+        <a class="navbar-brand" href="{{path('home.index')}}">
+            <img src="/images/main-logo.png" class="#">
         </a>
         <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <svg class="navbar-icon">
@@ -21,45 +21,45 @@
                 <li class="nav-item">
                 <a class="nav-link me-4 active" href="{{path('home.index')}}">Home</a>
                 </li>
-                <li class="nav-item">
+                {# <li class="nav-item">
                 <a class="nav-link me-4" href="#company-services">Services</a>
-                </li>
+                </li> #}
                 <li class="nav-item">
-                <a class="nav-link me-4" href="{{path('app_produit')}}">Phones</a>
+                <a class="nav-link me-4" href="{{path('app_produit')}}">Product</a>
                 </li>
-                <li class="nav-item">
+                {# <li class="nav-item">
                   <a class="nav-link me-4" href="#smart-watches">Watches</a>
-                </li>
-                <li class="nav-item">
+                </li> #}
+                {# <li class="nav-item">
                   <a class="nav-link me-4" href="#yearly-sale">Sale</a>
-                </li>
-                <li class="nav-item">
+                </li> #}
+                {# <li class="nav-item">
                   <a class="nav-link me-4" href="#latest-blog">Blog</a>
-                </li>
+                </li> #}
                 <li class="nav-item dropdown">
                   <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Pages</a>
                   <ul class="dropdown-menu">
                     <li>
                       <a href="about.html" class="dropdown-item">About</a>
                     </li>
-                    <li>
+                    {# <li>
                       <a href="blog.html" class="dropdown-item">Blog</a>
-                    </li>
-                    <li>
+                    </li> #}
+                    {# <li>
                       <a href="shop.html" class="dropdown-item">Shop</a>
-                    </li>
+                    </li> #}
                     <li>
                       <a href="{{ path('cart_index')}}" class="dropdown-item">Cart</a>
                     </li>
-                    <li>
+                    {# <li>
                       <a href="checkout.html" class="dropdown-item">Checkout</a>
-                    </li>
-                    <li>
+                    </li> #}
+                    {# <li>
                       <a href="single-post.html" class="dropdown-item">Single Post</a>
-                    </li>
-                    <li>
+                    </li> #}
+                    {# <li>
                       <a href="single-product.html" class="dropdown-item">Single Product</a>
-                    </li>
+                    </li> #}
                     <li>
                       <a href="contact.html" class="dropdown-item">Contact</a>
                     </li>
@@ -85,10 +85,10 @@
                         <ul class="dropdown-menu">
                           {% if app.user %}
                             <li><a class="dropdown-item" href="{{path('app_user_show', {id: app.user.id})}}">Profile</a></li>
-                            <li><a class="dropdown-item" href="{{path('app_logout', {id: app.user.id})}}">Deconnexion</a></li>
+                            <li><a class="dropdown-item" href="{{path('app_logout', {id: app.user.id})}}">Disconnection</a></li>
                           {% else %}
-                            <li><a href="{{path('app_login')}}">Connexion</a></li>
-                            <li><a href="{{path('app_register')}}">Créer un compte</a></li>
+                            <li><a href="{{path('app_login')}}">Connection</a></li>
+                            <li><a href="{{path('app_register')}}">Create an account</a></li>
                           {% endif %}
                         </ul>
                       </li>

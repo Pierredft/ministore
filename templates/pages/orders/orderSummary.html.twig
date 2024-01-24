@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main class='paddingTop'>
+<h1 class="text-center">Récapitulatif de la commande</h1>
+
+<p class="text-center">Numéro de commande : {{ order.reference }}</p>
+<p class="text-center">Date de commande : {{ order.createdAt|date('d/m/Y') }}</p>
+
+<h2 class="text-center mt-5">Produits commandés :</h2>
+<table class="table table-striped container">
+    <thead>
+    <tr>
+        <th scope="col">Produit</th>
+        <th scope="col">Quantité</th>
+        <th scope="col">Prix</th>
+        <th scope="col">Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% set total = 0 %}
+    {% for detail in orderDetails %}
+    <tr>
+        <td>{{ detail.getProducts().getNom() }}</td>
+        <td>{{ detail.getQuantity() }}</td>
+        <td>{{ detail.getPrix()/100 }} €</td>
+        <td>{{ detail.getQuantity()*detail.getPrix() /100 }} €</td>
+    </tr>
+    {% set total = total + (detail.getQuantity()*detail.getPrix() /100) %}
+    {% endfor %}
+    </tbody>
+    </table>
+    <h3 class="text-center mt-5">Total : {{ total }} €</h3>
+
+    <div class="text-center">
+    <h2 class="text-center mt-5">Informations de livraison :</h2>
+    <p class="text-center">Destinataire : {{ app.user.nom }} {{ app.user.prenom}}</p>
+    <p class="text-center">Coordonnée du destinataire : {{ order.deliveryAdress}}</p>
+    </div>
+    
+
+    <div class="text-center">
+    <a href="{{path("home.index")}}"><button class="btn btn-primary mt-5">Valider</button></a>
+    </div>
+</main>
+{% endblock %}

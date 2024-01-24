@@ -18,8 +18,8 @@ class Orders
     #[ORM\Column(length: 20, unique: true)]
     private ?string $reference = null;
 
-    // #[ORM\Column (type: 'datetime_immutable', options: ['default' => 'CURRENT_TIMESTAMP'])]
-    // private ?\DateTimeImmutable $created_at = null;
+    #[ORM\Column (type: 'datetime_immutable', options: ['default' => 'CURRENT_TIMESTAMP'])]
+    private ?\DateTimeImmutable $created_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'orders')]
     #[ORM\JoinColumn(nullable: false)]
@@ -32,9 +32,12 @@ class Orders
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $deliveryAdress = null;
 
+
+
     public function __construct()
     {
         $this->ordersDetails = new ArrayCollection();
+        $this->created_at = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -54,17 +57,17 @@ class Orders
         return $this;
     }
 
-    // public function getCreatedAt(): ?\DateTimeImmutable
-    // {
-    //     return $this->created_at;
-    // }
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->created_at;
+    }
 
-    // public function setCreatedAt(\DateTimeImmutable $created_at): static
-    // {
-    //     $this->created_at = $created_at;
+    public function setCreatedAt(\DateTimeImmutable $created_at): static
+    {
+        $this->created_at = $created_at;
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
     public function getUser(): ?User
     {

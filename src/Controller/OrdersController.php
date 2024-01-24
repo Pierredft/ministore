@@ -31,12 +31,11 @@ class OrdersController extends AbstractController
         //le panier n'est pas vide on crée une commande
 
         $order = new Orders();
+        //on remplis la commande
+        $order->setUser($this->getUser());
+        $order->setReference(uniqid());
         foreach ($panier as $item => $quantity) {
             $orderDetails = new OrdersDetails();
-
-            //on remplis la commande
-            $order->setUser($this->getUser());
-            $order->setReference(uniqid());
 
 
             //on récupère le produit
@@ -60,7 +59,8 @@ class OrdersController extends AbstractController
         $session->remove('panier');
 
         $this->addFlash('message', 'Votre commande a bien été enregistrée');
-        return $this->render('pages/orders/index.html.twig',['order'=>$order->getId()]);
+        return $this->redirectToRoute('app_orders_delivery', ['orderId' => $order->getId()]);
+        
     }
 
     #[Route("/order-delivery/{orderId}", name: "delivery")]
@@ -100,14 +100,14 @@ class OrdersController extends AbstractController
     }
         
         // Passez les détails de la commande à la vue
-        return $this->render('orders/order_delivery.html.twig', [
+        return $this->render('pages/orders/orderDelivery.html.twig', [
             'order' => $order,
             'orderDetails' => $orderDetails,
             'adresseLivraison1' => $adresseLivraison1,
             'adresseLivraison2' => $adresseLivraison2,
             'codePostal' => $codePostal,
             'ville' => $ville,
-            'deliveryAdress' => $deliveryAdress ?? null
+            'deliveryAdress' => $deliveryAdress ?? null,
         ]);
     }
     #[Route('/order-summary/{orderId}', name: 'summary' , methods: ['GET'])]
@@ -135,7 +135,7 @@ class OrdersController extends AbstractController
         }
     
         // Renvoyer la vue du récapitulatif de commande avec les informations de la commande
-        return $this->render('orders/order_summary.html.twig', [
+        return $this->render('pages/orders/orderSummary.html.twig', [
         'order' => $order,
         'orderDetails' => $orderDetails,
         'deliveryAdress' => $deliveryAdress ?? null
@@ -146,10 +146,10 @@ class OrdersController extends AbstractController
     public function allOrder( OrdersRepository $ordersRepository): Response
     {
         $user = $this->getUser(); // Récupère l'utilisateur actuellement connecté
-        $orders = $ordersRepository->findBy(['user' => $user], ['id' => 'DESC']);
+        $order = $ordersRepository->findBy(['user' => $user], ['id' => 'DESC']);
     
         $ordersWithDetails = [];
-        foreach ($orders as $order) {
+        foreach ($order as $order) {
             $details = $order->getOrdersDetails(); // Récupère les détails de la commande
             $ordersWithDetails[] = [
                 'order' => $order,
@@ -157,7 +157,7 @@ class OrdersController extends AbstractController
             ];
         }
     
-        return $this->render('orders/order_all.html.twig', [
+        return $this->render('pages/orders/orderAll.html.twig', [
         'ordersWithDetails' => $ordersWithDetails,
     
         ]);

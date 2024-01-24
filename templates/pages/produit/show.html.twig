@@ -4,6 +4,7 @@
 
 {% block body %}
     <div style="padding-top:90px;"></div>
+    <a href="{{path('app_produit')}}">Return</a>
     <h1 class="text-center">{{produit.nom}}</h1>
     <div class="d-flex flex-row mb-3 text-justify justify-content-center justify-content-around">
     <img src="{{asset('/images/produits/'~ produit.image) }}" class="card-img-top img-fluide p-2" style="width:20%" alt="img">
