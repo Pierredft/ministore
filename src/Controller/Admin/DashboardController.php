@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Logo;
 use App\Entity\Type;
 use App\Entity\Produit;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,8 +47,9 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'homepage');
-        yield MenuItem::linkToCrud('Produit', 'fas fa-map-marker-alt', Produit::class);
-        yield MenuItem::linkToCrud('Type', 'fas fa-comments', Type::class);
+        yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'home.index');
+        yield MenuItem::linkToCrud('Produit', 'fa-solid fa-shop', Produit::class);
+        yield MenuItem::linkToCrud('Type', 'fa-solid fa-microchip', Type::class);
+        yield MenuItem::linkToCrud('Logo', 'fa-solid fa-images', Logo::class);
     }
 }

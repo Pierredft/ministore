@@ -12,6 +12,8 @@
     </select>
     <button type="submit" class="btn btn-outline-secondary me-3">Sort</button>
 </form>
+
+
 <form action="{{ path('app_produit') }}" method="get">
         <select name="type" class="form-control mb-2" style="max-width: 150px">
         <option value="">All Types</option>
@@ -22,6 +24,8 @@
     <button class="btn btn-outline-secondary me-3" type="submit">Filter</button>
     <a href="{{ path('app_produit') }}" class="btn btn-outline-secondary">Reset</a>
 </form>
+
+
         <h1 class="text-center pb-4">All Products by MiniStore</h1>
         
         {% for produit in produits%}

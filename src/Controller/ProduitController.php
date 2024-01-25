@@ -14,32 +14,44 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProduitController extends AbstractController
 {
     #[Route('/produit', name: 'app_produit', methods: ['GET'])]
-    public function index(ProduitRepository $produitRepository, Request $request, TypeRepository $typeRepository ): Response
+    public function index(ProduitRepository $produitRepository, Request $request, TypeRepository $typeRepository): Response
     {
-        // BEGIN: ed8c6549bwf9
         $tri = $request->query->get('tri');
         $nom = $request->query->get('nom');
         $typeId = $request->query->get('type');
-    if ($typeId && $nom) {
-        $type = $typeRepository->find($typeId);
-        $produit = $produitRepository->findByTypeAndName($type, $nom);
-    } elseif ($typeId) {
-        $type = $typeRepository->find($typeId);
-        $produit = $produitRepository->findByType($type);
-    } elseif ($nom) {
-        $produit = $produitRepository->findByName($nom);
-    } else {
-        $produit = $produitRepository->findAll();
-    }
+
+        $produits = [];
+
+        if ($typeId && $nom) {
+            $type = $typeRepository->find($typeId);
+            $produits = $produitRepository->findByTypeAndName($type, $nom);
+        } elseif ($typeId) {
+            $type = $typeRepository->find($typeId);
+            $produits = $produitRepository->findByType($type);
+        } elseif ($nom) {
+            $produits = $produitRepository->findByName($nom);
+        } else {
+            $produits = $produitRepository->findAll();
+        }
+
         $types = $typeRepository->findAll();
 
         // Récupérer les produits en fonction de l'ordre de tri sélectionné
-        $produits = $produitRepository->findByExampleField('prix', $tri);
-        // END: ed8c6549bwf9
+        if ($tri) {
+            // Replace 'findByExampleField' with the appropriate method based on your requirements
+            $produits = $produitRepository->findByExampleField('prix', $tri);
+        }
 
+        // Filtrer les produits par type
+        if ($typeId) {
+            $produits = array_filter($produits, function ($p) use ($typeId) {
+                return $p->getType()->getId() === $typeId;
+            });
+        }
 
-        return $this->render('pages/produit/phone.html.twig', [
-            'produits' => $produits, 'types' => $types
+        return $this->render('pages/produit/products.html.twig', [
+            'produits' => $produits,
+            'types' => $types
         ]);
     }
 
