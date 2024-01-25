@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProduitController!{% endblock %}
+{% block title %}MiniStore - ShowProduct{% endblock %}
 
 {% block body %}
     <div style="padding-top:90px;"></div>
@@ -10,5 +10,5 @@
     <img src="{{asset('/images/produits/'~ produit.image) }}" class="card-img-top img-fluide p-2" style="width:20%" alt="img">
     <p class="p-2 d-flex align-items-center text-dark" style="width:50%">{{produit.description}}</p>
     </div>
-    <a href="{{ path('cart_add', {'id' : produit.id})}}" class="btn btn-primary" >Ajout panier</a>
+    <a href="{{ path('cart_add', {'id' : produit.id})}}" class="btn btn-primary" >Add to cart</a>
 {% endblock %}

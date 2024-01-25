@@ -15,7 +15,7 @@ class UserPasswordType extends AbstractType
         $builder
         ->add('plainPassword',passwordType::class,[
             'attr'=>['class'=>'form-control'],
-            'label'=>'Mot de passe',
+            'label'=>'Password',
             'label_attr'=>['class'=>'form-label mt-4'],
             'constraints'=>[new Assert\NotBlank()]
         ])
@@ -25,7 +25,7 @@ class UserPasswordType extends AbstractType
                     'attr'=>[
                         'class'=>'form-control'
                     ],
-                    'label'=>'Nouveau mot de passe',
+                    'label'=>'New Password',
                     'label_attr'=>[
                         'class'=> 'form-label'
                     ],
@@ -34,16 +34,16 @@ class UserPasswordType extends AbstractType
                     'attr'=>[
                         'class'=>'form-control'
                     ],
-                    'label'=>"Confirmation du mot de passe",
+                    'label'=>"Confirm new password",
                     'label_attr'=>[
                         'class'=>'form-label'
                     ],
                 ],
-                'invalid_message'=>"Les mots de passe ne correspondent pas"
+                'invalid_message'=>"The passwords do not match"
         ])
         ->add('submit', SubmitType::class,[
             'attr'=>['class'=>'btn btn-primary mt-4'],
-            'label'=>'Changer de mot de passe'
+            'label'=>'Change password'
         ]);
     }
 }

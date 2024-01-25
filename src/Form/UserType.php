@@ -27,7 +27,7 @@ class UserType extends AbstractType
                 'minLength'=>2,
                 'maxLength'=>50
             ],
-            'label'=>'Nom',
+            'label'=>'Name',
             'label_attr'=>[
                 'class'=>'form-label'
             ],
@@ -41,7 +41,7 @@ class UserType extends AbstractType
                 'minLength'=> 2,
                 'maxLength'=> 50
             ],
-            'label'=>'Prenom',
+            'label'=>'First name',
             'label_attr'=>[
                 'class'=>'form-label'
             ],
@@ -55,7 +55,7 @@ class UserType extends AbstractType
                 'minLength'=>2,
                 'maxLength'=>50,
             ],
-            'label'=>'Adress email',
+            'label'=>'Email adress',
             'label_attr'=>[
                 'class'=>'form-label',
             ],
@@ -71,7 +71,7 @@ class UserType extends AbstractType
                 'minLength'=>2,
                 'maxLength'=>50
             ],
-            'label'=>'numéro de telephone',
+            'label'=>'Phone number',
             'label_attr'=>[
                 'class'=>'form-label'
             ],

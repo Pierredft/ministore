@@ -1,15 +1,16 @@
 {% extends 'base.html.twig' %}
-
+{% block title %} Ministore - OrderAll{% endblock %}
 {% block body %}
+<div style="padding-top:90px;"></div>
     <main class='paddingTop'>
-    <h1 class="text-center mb-5">Toutes mes commandes</h1>
+    <h1 class="text-center mb-5">All Orders</h1>
 {% if ordersWithDetails %}
 {% for orderWithDetails in ordersWithDetails %}
 <!-- Button trigger modal -->
 <div class="d-flex justify-content-center mb-4 border-bottom pb-2">
-<h2>Commande #{{ orderWithDetails.order.id }}</h2>
+<h2>Order #{{ orderWithDetails.order.id }}</h2>
 <button type="button" class="btn btn-primary ms-3 " data-bs-toggle="modal" data-bs-target="#modal{{orderWithDetails.order.id}}">
-Voir le détail
+See details
 </button>
 </div>
 
@@ -18,21 +19,21 @@ Voir le détail
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
     <div class="modal-header justify-content-center">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Numero de commande : {{orderWithDetails.order.reference}}</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Order number : {{orderWithDetails.order.reference}}</h1>
     </div>
     <div class="modal-body d-flex">
-    <p class="text-secondary pe-3">Date de commande : <br> {{ orderWithDetails.order.createdAt|date('d/m/Y') }}</p>
+    <p class="text-secondary pe-3">Order date : <br> {{ orderWithDetails.order.createdAt|date('d/m/Y') }}</p>
     <div class="d-flex flex-column ps-5 border-start">
-        <h2>Adresse de livraison :</h2>
+        <h2>Delivery address :</h2>
         <p class="text-secondary">{{ orderWithDetails.order.deliveryAdress }}</p>
         <hr>
-        <h2>Détails de la commande :</h2>
+        <h2>Order details :</h2>
         <table>
     <thead>
         <tr class="border-bottom text-secondary">
-            <th>Produit</th>
-            <th>Quantité</th>
-            <th>Prix</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
         </tr>
     </thead>
     <tbody>
@@ -41,7 +42,7 @@ Voir le détail
             <tr>
                 <td>{{ detail.getProducts().getNom() }}</td>
                 <td>{{ detail.getQuantity() }}</td>
-                <td>{{ detail.getProducts().getPrix()/100 * detail.getQuantity() }} €</td>
+                <td>$ {{ detail.getProducts().getPrix()/100 * detail.getQuantity() }}</td>
             </tr>
             {% set total = total + (detail.getQuantity()*detail.getPrix() /100) %}
         {% endfor %}
@@ -49,7 +50,7 @@ Voir le détail
     <tfoot>
         <tr class="border-top text-secondary">
             <td colspan="2">Total</td>
-            <td>{{ total }} €</td>
+            <td>$ {{ total }} </td>
         </tr>
 </table>
         </div>
@@ -59,7 +60,7 @@ Voir le détail
 </div>
     {% endfor %}
 {% else %}
-<p>Vous n'avez pas encore passé de commande.</p>
+<p>You have not yet placed an order.</p>
 {% endif %}
 </main>
 {% endblock %}

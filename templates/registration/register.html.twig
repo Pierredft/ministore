@@ -4,7 +4,7 @@
 
 {% block body %}
 <div style="padding-top:90px;"></div>
-    <h1>Register</h1>
+    <h1 class="text-center">Register</h1>
 
     {{ form_errors(registrationForm) }}
 <div class="container">
@@ -22,8 +22,10 @@
         {{ form_row(registrationForm.codePostale) }}
         {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+    <button class="btn btn-lg btn-primary mt-4 ms-3 mb-4" type="submit">
+            {{ form_end(registrationForm) }}Register
+        </button>
     </div>
+    
         {# <a href="{{ path('hwi_oauth_service_redirect', {'service': 'google'}) }}">Se connecter avec Google</a> #}
 {% endblock %}

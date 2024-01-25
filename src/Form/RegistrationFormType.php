@@ -28,7 +28,7 @@ class RegistrationFormType extends AbstractType
                     'minLength'=>2,
                     'maxLength'=>50,
                 ],
-                'label'=>'Adress email',
+                'label'=>'Email adress',
                 'label_attr'=>[
                     'class'=>'form-label',
                 ],
@@ -44,7 +44,7 @@ class RegistrationFormType extends AbstractType
                     'minLength'=>2,
                     'maxLength'=>50
                 ],
-                'label'=>'Nom',
+                'label'=>'Name',
                 'label_attr'=>[
                     'class'=>'form-label'
                 ],
@@ -59,7 +59,7 @@ class RegistrationFormType extends AbstractType
                     'minLength'=> 2,
                     'maxLength'=> 50
                 ],
-                'label'=>'Prenom',
+                'label'=>'First name',
                 'label_attr'=>[
                     'class'=>'form-label'
                 ],
@@ -81,7 +81,7 @@ class RegistrationFormType extends AbstractType
                         'attr'=>[
                             'class'=>'form-control'
                         ],
-                        'label'=>'Mot de passe',
+                        'label'=>'Password',
                         'label_attr'=>[
                             'class'=> 'form-label'
                         ],
@@ -90,12 +90,12 @@ class RegistrationFormType extends AbstractType
                         'attr'=>[
                             'class'=>'form-control'
                         ],
-                        'label'=>"Confirmation du mot de passe",
+                        'label'=>"Confirm password",
                         'label_attr'=>[
                             'class'=>'form-label'
                         ],
                     ],
-                    'invalid_message'=>"Les mots de passe ne correspondent pas"
+                    'invalid_message'=>"The passwords do not match"
             ])
             ->add('numTel', TextType::class,[
                 'attr'=>[
@@ -103,7 +103,7 @@ class RegistrationFormType extends AbstractType
                     'minLength'=>2,
                     'maxLength'=>50
                 ],
-                'label'=>'numéro de telephone',
+                'label'=>'Phone number',
                 'label_attr'=>[
                     'class'=>'form-label'
                 ],
@@ -118,7 +118,7 @@ class RegistrationFormType extends AbstractType
                     'minLength'=>1,
                     'maxLength'=>50
                 ],
-                'label'=>'numéro de maison',
+                'label'=>'House number',
                 'label_attr'=>[
                     'class'=>'form-label'
                 ],
@@ -133,7 +133,7 @@ class RegistrationFormType extends AbstractType
                     'minLength'=>2,
                     'maxLength'=>50
                 ],
-                'label'=>'nom de la voie',
+                'label'=>'Street name',
                 'label_attr'=>[
                     'class'=>'form-label'
                 ],
@@ -148,7 +148,7 @@ class RegistrationFormType extends AbstractType
                     'minLength'=>2,
                     'maxLength'=>50
                 ],
-                'label'=>'ville',
+                'label'=>'City',
                 'label_attr'=>[
                     'class'=>'form-label'
                 ],
@@ -163,7 +163,7 @@ class RegistrationFormType extends AbstractType
                     'minLength'=>2,
                     'maxLength'=>50
                 ],
-                'label'=>'codePostale',
+                'label'=>'Zip code',
                 'label_attr'=>[
                     'class'=>'form-label'
                 ],

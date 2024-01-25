@@ -22,7 +22,7 @@ class UserAdresseType extends AbstractType
                 'minLength'=>1,
                 'maxLength'=>50
             ],
-            'label'=>'numéro de maison',
+            'label'=>'House number',
             'label_attr'=>[
                 'class'=>'form-label'
             ],
@@ -37,7 +37,7 @@ class UserAdresseType extends AbstractType
                 'minLength'=>1,
                 'maxLength'=>50
             ],
-            'label'=>'nom de la voie',
+            'label'=>'Street name',
             'label_attr'=>[
                 'class'=>'form-label'
             ],
@@ -52,7 +52,7 @@ class UserAdresseType extends AbstractType
                 'minLength'=>2,
                 'maxLength'=>50
             ],
-            'label'=>'ville',
+            'label'=>'City',
             'label_attr'=>[
                 'class'=>'form-label'
             ],
@@ -67,7 +67,7 @@ class UserAdresseType extends AbstractType
                 'minLength'=>2,
                 'maxLength'=>50
             ],
-            'label'=>'codePostale',
+            'label'=>'Zip code',
             'label_attr'=>[
                 'class'=>'form-label'
             ],

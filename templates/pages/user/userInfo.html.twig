@@ -1,15 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon compte{% endblock %}
+{% block title %}MiniStore - Account{% endblock %}
 
 {% block body %}
 <div style="padding-top:90px;"></div>
-  <h1 class="text-center mt-4 mb-5" id="titreUs">Bonjour {{app.user.prenom}}</span></h1>
+  <h1 class="text-center mt-4 mb-5" id="titreUs">Hello {{app.user.prenom}} !!</span></h1>
 
 <main class='paddingTop d-flex justify-content-evenly'>
 <div class="card" style="width: 18rem;">
   <div class="card-body">
-    <h5 class="card-title">Profile</h5>
+    <h5 class="card-title">Profil</h5>
     <h6 class="card-subtitle mb-2 text-body-secondary">{{app.user.prenom}} {{app.user.nom}}</h6>
     <h6 class="card-subtitle mb-2 text-body-secondary">{{app.user.email}}</h6>
     <h6 class="card-subtitle mb-2 text-body-secondary">{{app.user.numTel}}</h6>
@@ -30,8 +30,9 @@
 
 <div class="card" style="width: 18rem;">
   <div class="card-body">
-    <h5 class="card-title">Commande</h5>
-    <a href="{{path('app_orders_all')}}" class="card-link text-primary">Voir l'historique des commande</a>
+    <h5 class="card-title">Orders</h5>
+    <h6 class="card-title">Click here to view your previous orders</h6>
+    <a href="{{path('app_orders_all')}}" class="card-link text-primary">Manage</a>
   </div>
 </div>
 

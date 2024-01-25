@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modification profile{% endblock %}
+{% block title %}Ministore - ProfileModification{% endblock %}
 
 {% block body %}
 <div style="padding-top:90px;"></div>
 <div class="container">
-    <h1 class="mt-4">Modification de votre profile utilisateur</h1>
+    <h1 class="mt-4">Changing your user profile</h1>
     <div class="mt-4">
         {% for message in app.flashes('Danger')%}
             <div class="alert alert-warning mt-4">
@@ -13,9 +13,9 @@
             </div>
         {% endfor %}
         {{form(form)}}
-        <a class="text-success" href="{{path('app_edit_password',{id:app.user.id})}}">Changer password</a>
+        <a class="text-success" href="{{path('app_edit_password',{id:app.user.id})}}">Change password</a>
         <div class="mt-4">
-        <a class="text-dark" href="{{path('app_user_show', {id: app.user.id})}}">Retour au profile utilisateur</a>
+        <a class="text-dark" href="{{path('app_user_show', {id: app.user.id})}}">Return to user profile</a>
         </div>
     </div>
 </div>
