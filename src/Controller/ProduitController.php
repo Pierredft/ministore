@@ -16,42 +16,58 @@ class ProduitController extends AbstractController
     #[Route('/produit', name: 'app_produit', methods: ['GET'])]
     public function index(ProduitRepository $produitRepository, Request $request, TypeRepository $typeRepository): Response
     {
-        $tri = $request->query->get('tri');
         $nom = $request->query->get('nom');
         $typeId = $request->query->get('type');
-
-        $produits = [];
-
-        if ($typeId && $nom) {
-            $type = $typeRepository->find($typeId);
-            $produits = $produitRepository->findByTypeAndName($type, $nom);
-        } elseif ($typeId) {
-            $type = $typeRepository->find($typeId);
-            $produits = $produitRepository->findByType($type);
-        } elseif ($nom) {
-            $produits = $produitRepository->findByName($nom);
-        } else {
-            $produits = $produitRepository->findAll();
-        }
-
+        $order = $request->query->get('order');
+        
+    if ($typeId && $nom) {
+        $type = $typeRepository->find($typeId);
+        $produits = $produitRepository->findByTypeAndName($type, $nom, $order);
+    } elseif ($typeId) {
+        $type = $typeRepository->find($typeId);
+        $produits = $produitRepository->findByType($type, $order);
+    } elseif ($nom) {
+        $produits = $produitRepository->findByName($nom, $order);
+    } else {
+        $produits = $produitRepository->findAll($order);
+    }
         $types = $typeRepository->findAll();
+        // $tri = $request->query->get('tri');
+        // $nom = $request->query->get('nom');
+        // $typeId = $request->query->get('type');
 
-        // Récupérer les produits en fonction de l'ordre de tri sélectionné
-        if ($tri) {
-            // Replace 'findByExampleField' with the appropriate method based on your requirements
-            $produits = $produitRepository->findByExampleField('prix', $tri);
-        }
+        // $produits = [];
 
-        // Filtrer les produits par type
-        if ($typeId) {
-            $produits = array_filter($produits, function ($p) use ($typeId) {
-                return $p->getType()->getId() === $typeId;
-            });
-        }
+        // if ($typeId && $nom) {
+        //     $type = $typeRepository->find($typeId);
+        //     $produits = $produitRepository->findByTypeAndName($type, $nom);
+        // } elseif ($typeId) {
+        //     $type = $typeRepository->find($typeId);
+        //     $produits = $produitRepository->findByType($type);
+        // } elseif ($nom) {
+        //     $produits = $produitRepository->findByName($nom);
+        // } else {
+        //     $produits = $produitRepository->findAll();
+        // }
+
+        // $types = $typeRepository->findAll();
+
+        // // Récupérer les produits en fonction de l'ordre de tri sélectionné
+        // if ($tri) {
+        //     // Replace 'findByExampleField' with the appropriate method based on your requirements
+        //     $produits = $produitRepository->findByExampleField('prix', $tri);
+        // }
+
+        // // Filtrer les produits par type
+        // if ($typeId) {
+        //     $produits = array_filter($produits, function ($p) use ($typeId) {
+        //         return $p->getType()->getId() === $typeId;
+        //     });
+        // }
 
         return $this->render('pages/produit/products.html.twig', [
             'produits' => $produits,
-            'types' => $types
+            'types' => $types,
         ]);
     }
 

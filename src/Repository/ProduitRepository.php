@@ -21,45 +21,99 @@ class ProduitRepository extends ServiceEntityRepository
         parent::__construct($registry, Produit::class);
     }
 
-    public function findByExampleField($field, $tri)
-    {
-        $qb = $this->createQueryBuilder('p');
+    public function findByType($type, $order = null)
+{
+    $qb = $this->createQueryBuilder('p')
+        ->andWhere('p.type = :type')
+        ->setParameter('type', $type);
 
-        if ($tri === 'asc') {
-            $qb->orderBy('p.'.$field, 'ASC');
-        } elseif ($tri === 'desc') {
-            $qb->orderBy('p.'.$field, 'DESC');
-        }
-
-        return $qb->getQuery()->getResult();
+    if ($order) {
+        $qb->orderBy('p.prix', $order);
     }
 
-    public function findByType($type)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.type = :type')
-            ->setParameter('type', $type)
-            ->getQuery()
-            ->getResult();
+    return $qb->getQuery()->getResult();
+}
+
+public function findByTypeAndName($type, $nom, $order = null)
+{
+    $qb = $this->createQueryBuilder('p')
+        ->andWhere('p.type = :type')
+        ->andWhere('p.nom LIKE :nom')
+        ->setParameter('type', $type)
+        ->setParameter('nom', '%'.$nom.'%');
+
+    if ($order) {
+        $qb->orderBy('p.prix', $order);
     }
-        public function findByTypeAndName($type, $nom)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.type = :type')
-            ->andWhere('p.nom LIKE :nom')
-            ->setParameter('type', $type)
-            ->setParameter('nom', '%'.$nom.'%')
-            ->getQuery()
-            ->getResult();
+
+    return $qb->getQuery()->getResult();
+}
+
+public function findByName($nom, $order = null)
+{
+    $qb = $this->createQueryBuilder('p')
+        ->andWhere('p.nom LIKE :nom')
+        ->setParameter('nom', '%'.$nom.'%');
+
+    if ($order) {
+        $qb->orderBy('p.prix', $order);
     }
-        public function findByName($nom)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.nom LIKE :nom')
-            ->setParameter('nom', '%'.$nom.'%')
-            ->getQuery()
-            ->getResult();
+
+    return $qb->getQuery()->getResult();
+}
+
+public function findAll($order = null)
+{
+    $qb = $this->createQueryBuilder('p');
+
+    if ($order) {
+        $qb->orderBy('p.prix', $order);
     }
+
+    return $qb->getQuery()->getResult();
+}
+
+    // public function findByExampleField($field, $tri)
+    // {
+    //     $qb = $this->createQueryBuilder('p')
+    //         ->andWhere('p.type = :type')
+    //         ->setParameter('type', $type);
+
+    //     if ($tri === 'asc') {
+    //         $qb->orderBy('p.'.$field, 'ASC');
+    //     } elseif ($tri === 'desc') {
+    //         $qb->orderBy('p.'.$field, 'DESC');
+    //     }
+
+    //     return $qb->getQuery()->getResult();
+    // }
+
+    // public function findByType($type)
+    // {
+    //     return $this->createQueryBuilder('p')
+    //         ->andWhere('p.type = :type')
+    //         ->setParameter('type', $type)
+    //         ->getQuery()
+    //         ->getResult();
+    // }
+    //     public function findByTypeAndName($type, $nom)
+    // {
+    //     return $this->createQueryBuilder('p')
+    //         ->andWhere('p.type = :type')
+    //         ->andWhere('p.nom LIKE :nom')
+    //         ->setParameter('type', $type)
+    //         ->setParameter('nom', '%'.$nom.'%')
+    //         ->getQuery()
+    //         ->getResult();
+    // }
+    //     public function findByName($nom)
+    // {
+    //     return $this->createQueryBuilder('p')
+    //         ->andWhere('p.nom LIKE :nom')
+    //         ->setParameter('nom', '%'.$nom.'%')
+    //         ->getQuery()
+    //         ->getResult();
+    // }
 //    /**
 //     * @return Produit[] Returns an array of Produit objects
 //     */

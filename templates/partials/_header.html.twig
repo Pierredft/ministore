@@ -1,9 +1,9 @@
 <header id="header" class="site-header header-scrolled position-fixed text-black bg-light">
     <nav id="header-nav" class="navbar navbar-expand-lg px-3 mb-3">
         <div class="container-fluid">
-        <a class="navbar-brand" href="{{path('home.index')}}">
-            <img src="/images/main-logo.png" class="#">
-        </a>
+        <a class="navbar-brand" href="{{path("home.index")}}">
+            <img src="{{ asset('images/logo/' ~ logo_service.getLogo().imgLogo) }}" style="max-width:300px;">
+          </a>
         <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <svg class="navbar-icon">
             <use xlink:href="#navbar-icon"></use>
@@ -24,9 +24,11 @@
                 {# <li class="nav-item">
                 <a class="nav-link me-4" href="#company-services">Services</a>
                 </li> #}
+                {% for navItem in nav_service.getNavItems() %}
                 <li class="nav-item">
-                <a class="nav-link me-4" href="{{path('app_produit')}}">Product</a>
+                <a class="nav-link me-4" href="{{ navItem.getLien() }}">{{ navItem.getNom() }}</a>
                 </li>
+              {% endfor %}
                 {# <li class="nav-item">
                   <a class="nav-link me-4" href="#smart-watches">Watches</a>
                 </li> #}
@@ -40,7 +42,7 @@
                   <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Pages</a>
                   <ul class="dropdown-menu">
                     <li>
-                      <a href="about.html" class="dropdown-item">About</a>
+                      <a href="{{path('home.index')}}" class="dropdown-item">About</a>
                     </li>
                     {# <li>
                       <a href="blog.html" class="dropdown-item">Blog</a>
@@ -61,8 +63,7 @@
                       <a href="single-product.html" class="dropdown-item">Single Product</a>
                     </li> #}
                     <li>
-                      <a href="contact.html" class="dropdown-item">Contact</a>
-                    </li>
+                      <a href="{{path('home.index')}}" class="dropdown-item">Contact</a>
                   </ul>
                 </li>
                 <li class="nav-item">

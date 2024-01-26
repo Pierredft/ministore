@@ -3,8 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Logo;
+use App\Entity\Nav;
 use App\Entity\Type;
 use App\Entity\Produit;
+use App\Service\NavService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -51,5 +53,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Produit', 'fa-solid fa-shop', Produit::class);
         yield MenuItem::linkToCrud('Type', 'fa-solid fa-microchip', Type::class);
         yield MenuItem::linkToCrud('Logo', 'fa-solid fa-images', Logo::class);
+        yield MenuItem::linkToCrud('Nav', 'fa-solid fa-images', Nav::class);
     }
 }

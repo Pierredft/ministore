@@ -4,29 +4,24 @@
 
 {% block body %}
     <div style="padding-top:90px;"></div>
-    <form method="get" action="{{ path('app_produit') }}">
-    <select name="tri" class="form-control mb-2" style="max-width: 150px">
-        <option value="">Sort in </option>
-        <option value="asc">Ascending Order</option>
-        <option value="desc">Descending Order</option>
-    </select>
-    <button type="submit" class="btn btn-outline-secondary me-3">Sort</button>
-</form>
-
-
-<form action="{{ path('app_produit') }}" method="get">
-        <select name="type" class="form-control mb-2" style="max-width: 150px">
-        <option value="">All Types</option>
+        <h1 class="text-center pb-4">All Products by MiniStore</h1>
+        <form action="{{ path('app_produit') }}" method="get">
+<div class="d-flex flex-row mb-3 ms-4 ">
+        <select name="type" class="form-control mb-2 p-2 me-2" style="max-width: 150px">
+        <option class="p-2" value="">All Types</option>
             {% for type in types %}
-            <option value="{{ type.id }}">{{ type }}</option>
+            <option class="p-2" value="{{ type.id }}">{{ type }}</option>
             {% endfor %}
         </select>
+        <select name="order" class="form-control mb-2 p-2 me-2" style="max-width: 150px">
+            <option class="p-2" value="">Sort by price</option>
+            <option class="p-2" value="asc">Ascending</option>
+            <option class="p-2" value="desc">Descending</option>
+        </select>
     <button class="btn btn-outline-secondary me-3" type="submit">Filter</button>
-    <a href="{{ path('app_produit') }}" class="btn btn-outline-secondary">Reset</a>
+    <a href="{{ path('app_produit') }}" class="btn btn-outline-secondary me-3">Reset</a>
+    </div>
 </form>
-
-
-        <h1 class="text-center pb-4">All Products by MiniStore</h1>
         
         {% for produit in produits%}
             <div class="d-flex flex-column">
